@@ -1,0 +1,9 @@
+POST http://localhost:3001/auth/register
+Content-Type: application/json
+
+{
+  "name": "Edison",
+  "email": "gestor@empresa.com",
+  "password_hash": "123",
+  "token": "TOKEN_BACKEND"
+}
