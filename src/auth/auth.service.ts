@@ -33,6 +33,7 @@ export class AuthService {
         throw new UnauthorizedException('E-mail já cadastrado');
     }
 
+    
     // // 2. Criar usuário
     // const newUser = await this.usersService.create(dto);
 
