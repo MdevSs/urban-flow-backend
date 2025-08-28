@@ -14,8 +14,8 @@ import { JwtAuthGuard } from './guards/jwt-auth.guard';
     PassportModule,
     JwtModule.register({
       global: true,
-      secret: process.env.SECRET_SECRET || 'fallback_secret',
-      signOptions: { expiresIn: '604.800s' },
+      secret: process.env.SECRET_KEY || 'cd4bcece3be895b5f26f0cc4167bd4e4f394cdec265ab62b87783a5d9ce1e396',
+      signOptions: { expiresIn: '7d' },
     }),
     UsersModule,
   ],

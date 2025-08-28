@@ -19,10 +19,12 @@ export class TwoFAService {
   
   constructor(private usersService: UsersService){
     this.transporter = nodemailer.createTransport({
-      service: 'gmail',
+      host: 'smtp.zoho.com',
+      port: 465,
+      secure: true,
       auth: {
         user: 'urbanflowai@gmail.com',
-        pass: '',
+        pass: process.env.ZOHO_KEY || "1Fpk4wnqtbWy",
       },
     });
   }

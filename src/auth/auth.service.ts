@@ -14,16 +14,18 @@ export class AuthService {
     const ok = await this.usersService.validatePassword(user, pass);
     if (!ok) throw new UnauthorizedException("Invalid Credentials");
     // remove sensitive fields before returning
-    const payload = { sub: user.id, username: user.email };
+    const payload = { sub: user.id, email: user.email };
+    console.log(payload)
     return {
       acces_token: await this.jwt.signAsync(payload),
     };
   }
 
-  async login(user: any) {
-    const payload = { sub: user.id, email: user.email};
-    return { access_token: this.jwt.sign(payload) };
-  }
+  // async login(token: {acces_token: string}) {
+  //   console.log("login jwt: "+ user)
+  //   const payload = { sub: user.id, email: user.email};
+  //   return { email: payload.email, access_token: this.jwt.sign(payload) };
+  // }
 
   // src/auth/auth.service.ts
   async register(dto: CreateUsersDto ) {

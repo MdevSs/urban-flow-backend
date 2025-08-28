@@ -1,12 +1,19 @@
-import { Controller, Post, Body, UnauthorizedException, UseGuards, Req } from '@nestjs/common';
+import { Controller, Post, Body, UnauthorizedException, UseGuards, Req, Request } from '@nestjs/common';
 import { AuthService } from 'src/auth/auth.service';
 import { JwtAuthGuard } from 'src/auth/guards/jwt-auth.guard';
 import { TwoFAService } from './2fa.service';
 
 @Controller('2fa')
-export class AuthController {
+export class TwoFAController {
     constructor(private readonly twoFAService: TwoFAService) {}
 
+    @UseGuards(JwtAuthGuard)
+    @Post('teste')
+    async Teste(@Request() req) {
+        // const user = req.sub;
+        return { user: req.user }
+    }
+    
     @UseGuards(JwtAuthGuard)
     @Post('request')
     async requestCode(@Req() req) {
