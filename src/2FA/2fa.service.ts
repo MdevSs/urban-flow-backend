@@ -18,15 +18,14 @@ export class TwoFAService {
   private codes = new Map<string, CodeEntry>();
   
   constructor(private usersService: UsersService){
-    this.transporter = nodemailer.createTransport({
+      this.transporter = nodemailer.createTransport({
       host: 'smtp.zoho.com',
       port: 465,
       secure: true,
       auth: {
-        user: 'urbanflowai@gmail.com',
+        user: 'contato@urbanflowai.me',
         pass: process.env.ZOHO_KEY || "1Fpk4wnqtbWy",
-      },
-    });
+      }});
   }
   
 
@@ -52,13 +51,18 @@ export class TwoFAService {
   } 
 
   async sendEmail(to: string, code){
-    await this.transporter.sendEmail({
-      from: 'urbanflowai@gmail.com',
-      to,
-      subject: '2FA Verification Code',
-      text: `Your Code is ${code}`,
-      html: `<p>Your Code is <strong>${code}</strong></p>`
-    })
+    try{
+        await this.transporter.sendMail({
+        from: 'contato@urbanflowai.me',
+        to,
+        subject: '2FA Verification Code',
+        text: `Your Code is ${code}`,
+        html: `<p>Your Code is <strong>${code}</strong></p>`
+        })
+    }catch(e){
+      console.error('Erro ao enviar email:', e);
+      throw new UnauthorizedException('Falha ao enviar email')
+    }
   }
 
 }
