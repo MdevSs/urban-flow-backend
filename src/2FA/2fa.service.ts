@@ -40,7 +40,7 @@ export class TwoFAService {
     const record = this.codes.get(userId);
     if (!record) return false;
     if (Date.now() > record.expires) return false;
-    
+    if (input!=record.code) return false
     this.codes.delete(userId);
 
     return true;
