@@ -16,21 +16,62 @@
 - [Database.sql](https://github.com/MdevSs/flowfeed-backend/raw/main/download/download.zip)
 
 
-## Baixar Dependências
+## Setup
 
-<p align="left">Ao baixar o projeto, rode o comando abaixo para baixar as dependências, e depois conseguir rodar a aplicação</p>
+<p align="left">1. Ao baixar o projeto, rode o comando abaixo para baixar as dependências, e depois conseguir rodar a aplicação</p>
 
 ```bash
 $ npm install
 ```
 
-<p align="left">Caso faça alguma alteração no schema.prisma é necessário rodar o comando abaixo para aplicar</p>
+<br>
+ 
+<p align="left">2. Rode o Banco de Dados com Docker (Necessário ter o docker instalado)</p>
+<p align="left" style="color: gray;">no Windows é necessário estar com o Docker Desktop aberto/segundo plano</p>
+
+
+```bash
+# na raiz do projeto rode o comando abaixo
+$ docker compose up
+```
+
+<br>
+ 
+
+<p align="left">3. Rode o comando para alterar o banco de dados, banco este que está executando no Docker, ao digitar esse comando adicionamos as tabelas configuradas pelo Prisma a ele</p>
+
+```bash
+$ npx prisma db push
+```
+
+<br>
+
+<p align="left">4. Rode esse comando para gerar as tipagens das tabelas do banco de dados configurado pelo Prisma</p>
 
 ```bash
 $ npx prisma generate
 ```
 
+<br>
 
+__(SUGESTÃO)__ 5. Por fim, caso queira adicionar registros as tabelas de forma simples e fácil, recomendo baixar a Extensão `REST Client` do VS Code e fazer as requisições pelo arquivo `requisicoes.http` que está na raiz do projeto, basta abrir o arquivo, alterá-lo se for necessário e apertar em __Send Request__ para fazer a requisição
+
+Exemplo de requisição no arquivo
+```bash
+# caminho da requisição para acessar os endpoints/controllers
+POST http://localhost:3001/api/users/create
+Content-Type: application/json
+
+# dados que vão ser enviado no corpo/Body da requisição
+{
+  "name": "admin",
+  "email": "seuemail@gmail.com",
+  "password_hash": "123"
+}
+```
+
+<br>
+ 
 ## Compilar e rodar projeto
 
 ```bash
@@ -39,10 +80,6 @@ $ npm run start
 
 # roda o projeto (com watch mode, atualiza a aplicação caso altere o código e salve)
 $ npm run dev
-
-# production mode
-$ npm run start:prod
-```
 
 ## Run tests
 

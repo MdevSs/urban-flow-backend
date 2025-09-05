@@ -1,5 +1,3 @@
-version: '3.7'
-
 services:
   uf-app-pg:
     image: bitnami/postgresql:latest

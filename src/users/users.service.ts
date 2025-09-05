@@ -14,7 +14,7 @@ export class UsersService {
     })
 
     if(userWithSameEmail)
-      throw new ConflictException('users with same email already exists')
+      throw new ConflictException("users with same email already exists")
 
     const hashed = await bcrypt.hash(password_hash, 6);
     try

@@ -1,9 +1,8 @@
-POST http://localhost:3001/auth/register
+POST http://localhost:3001/api/users/create
 Content-Type: application/json
 
 {
-  "name": "Edison",
-  "email": "gestor@empresa.com",
-  "password_hash": "123",
-  "token": "TOKEN_BACKEND"
+  "name": "admin",
+  "email": "seuemail@gmail.com",
+  "password_hash": "123"
 }
