@@ -8,22 +8,23 @@ export class UsersService {
   constructor(private prisma: PrismaService) {}
 
   async create(dto: CreateUsersDto) {
-    const { name, email, password_hash } = dto
+    const { name, email, telefone, data_cadastro, tipo_usuario, ativo, code } = dto
     const userWithSameEmail = await this.prisma.users.findUnique({
       where: { email },
     })
 
     if(userWithSameEmail)
-      throw new ConflictException("users with same email already exists")
+      throw new ConflictException('users with same email already exists')
 
-    const hashed = await bcrypt.hash(password_hash, 6);
+    const hashed = await bcrypt.hash(email, 6);
+
     try
     {
       const user = await this.prisma.users.create({
         data: {
           name,
           email,
-          password_hash: hashed,
+          code: (hashed.slice(5)+"-"+hashed.slice(6,11)+"-"+hashed.slice(12,17)),
         },
       });
       return {

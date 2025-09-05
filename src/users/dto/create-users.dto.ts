@@ -1,11 +1,13 @@
+// import Role from ""
 
 export interface CreateUsersDto {
     name: string,
     email: string,
-    password_hash: string,
-    // created_at: Date,
-    // profile_picture?: string,
-    // role?: 'user' | 'manager'
+    tipo_usuario: Role
+    telefone?: string
+    data_cadastro: Date,
+    code: string,
+    ativo: boolean
 }
 export interface UpdateUsersDto extends Partial<CreateUsersDto> { }
 

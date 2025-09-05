@@ -8,9 +8,18 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum Role {
+  ADMIN
+  USER
+}
+
 model users {
   id              String        @id @default(uuid())
   name            String
   email           String     @unique
-  password_hash   String    
+  tipo_usuario    Role       @default(USER)
+  telefone        String     @db.VarChar(14)
+  data_cadastro   DateTime   @default(now())
+  code            String     @db.VarChar(17)
+  ativo           Boolean    @default(true)
 }
