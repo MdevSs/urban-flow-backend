@@ -1,9 +1,9 @@
 
 // src/auth/auth.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUsersDto } from 'src/users/dto/create-users.dto';
+import { CreateUsuarioDto } from 'src/usuario/dto/usuario.dto';
 import * as nodemailer from "nodemailer";
 import { randomInt } from 'crypto';
 
@@ -17,7 +17,7 @@ export class TwoFAService {
   private transporter;
   private codes = new Map<string, CodeEntry>();
   
-  constructor(private usersService: UsersService){
+  constructor(private usersService: UsuarioService){
       this.transporter = nodemailer.createTransport({
       host: 'smtp.zoho.com',
       port: 465,

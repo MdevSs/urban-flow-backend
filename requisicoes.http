@@ -1,8 +1,26 @@
-POST http://localhost:3001/api/users/create
+POST http://localhost:3001/api/usuario/create
 Content-Type: application/json
 
 {
-  "name": "admin",
-  "email": "seuemail@gmail.com",
-  "password_hash": "123"
+  "nome": "admin",
+  "email": "leandrohenrique.denise@gmail.com",
+  "password": "123",
+  "telefone": "1195237482",
+  "tipo_usuario": "admin"
 }
+
+###
+
+POST http://localhost:3001/api/auth/login/
+Content-Type: application/json
+
+{
+  "email": "leandrohenrique.denise@gmail.com",
+  "password": "123"
+}
+
+###
+
+POST http://localhost:3001/api/2fa/teste/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkOTU1NmIyNC1lY2IzLTRiZmItOWQzNi1kYjk2ZGY3NzBhZTgiLCJlbWFpbCI6ImxlYW5kcm9oZW5yaXF1ZS5kZW5pc2VAZ21haWwuY29tIiwiaWF0IjoxNzU3MjY1OTQxLCJleHAiOjE3NTc4NzA3NDF9.F8Pwx6120MpQKqXkqE9FDZjVxH6susLKkspgIWnFePw
+

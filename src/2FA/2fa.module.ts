@@ -1,6 +1,6 @@
 // src/auth/auth.module.ts
 import { Module } from '@nestjs/common';
-import { UsersModule } from '../users/users.module';
+import { UsuarioModule } from '../usuario/usuario.module';
 import { PrismaService } from 'src/common/db/prisma.service';
 import * as nodemailer from "nodemailer";
 import { TwoFAService } from './2fa.service';
@@ -9,7 +9,7 @@ import { TwoFAController } from './2fa.controller';
 
 @Module({
   imports: [
-    UsersModule,
+    UsuarioModule,
     JwtModule
   ],
   providers: [TwoFAService],

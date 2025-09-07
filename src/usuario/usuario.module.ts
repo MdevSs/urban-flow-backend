@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { UsersService } from './users.service';
-import { UsersController } from './users.controller';
+import { UsuarioService } from './usuario.service';
+import { UsuarioController } from './usuario.controller';
 import { PrismaService } from 'src/common/db/prisma.service';
 import { DBModule } from 'src/common/db/db.module';
 
@@ -8,8 +8,8 @@ import { DBModule } from 'src/common/db/db.module';
   imports: [DBModule],
   // em Imports não se deve importar um serviço individual, 
   // e sim o módulo da qual ele fazer parte
-  controllers: [UsersController], 
-  providers: [UsersService, PrismaService],
-  exports: [UsersService],
+  controllers: [UsuarioController], 
+  providers: [UsuarioService, PrismaService],
+  exports: [UsuarioService],
 })
-export class UsersModule {}
+export class UsuarioModule {}

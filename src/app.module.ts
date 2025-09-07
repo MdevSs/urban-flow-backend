@@ -1,13 +1,14 @@
 import { PrismaService } from './common/db/prisma.service';
-import { UsersModule } from './users/users.module';
+import { UsuarioModule } from './usuario/usuario.module';
 import { AuthModule } from './auth/auth.module';
 import { Module } from '@nestjs/common';
-import { UsersController } from './users/users.controller';
+import { UsuarioController } from './usuario/usuario.controller';
 import { TwoFAModule } from './2FA/2fa.module';
+import { SemaforoModule } from './semaforo/semaforo.module';
 
 @Module({
-  imports: [ UsersModule, AuthModule, TwoFAModule ],
+  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule ],
   providers: [PrismaService],
-  controllers: [UsersController]
+  controllers: [UsuarioController]
 })
 export class AppModule {}

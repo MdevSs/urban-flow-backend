@@ -1,5 +1,5 @@
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["relationJoins"]
 }
 
@@ -8,18 +8,84 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-enum Role {
-  ADMIN
-  USER
+model analytics {
+  id_analytics       Int       @id @default(autoincrement())
+  id_semaforo        Int
+  data_hora          DateTime? @default(now()) @db.Timestamp(6)
+  veiculos_contados  Int?
+  velocidade_media   Decimal?  @db.Decimal(5, 2)
+  pedestres_contados Int?
+  semaforo           semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
 }
 
-model users {
-  id              String        @id @default(uuid())
-  name            String
-  email           String     @unique
-  tipo_usuario    Role       @default(USER)
-  telefone        String     @db.VarChar(14)
-  data_cadastro   DateTime   @default(now())
-  code            String     @db.VarChar(17)
-  ativo           Boolean    @default(true)
+model configuracoes_semaforo {
+  id_config        Int       @id @default(autoincrement())
+  id_semaforo      Int
+  nome_config      String?   @db.VarChar(100)
+  valor            String?   @db.VarChar(255)
+  data_atualizacao DateTime? @default(now()) @db.Timestamp(6)
+  semaforo         semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model historico_status {
+  id_historico       Int       @id @default(autoincrement())
+  id_semaforo        Int
+  data_hora          DateTime? @default(now()) @db.Timestamp(6)
+  status_ativo       Boolean?
+  status_funcionando Boolean?
+  observacao         String?
+  semaforo           semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model manutencoes {
+  id_manutencao Int       @id @default(autoincrement())
+  id_semaforo   Int
+  data_inicio   DateTime? @db.Timestamp(6)
+  data_fim      DateTime? @db.Timestamp(6)
+  tipo          String?   @db.VarChar(50)
+  responsavel   String?   @db.VarChar(100)
+  observacao    String?
+  semaforo      semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model notificacoes {
+  id_notificacao Int       @id @default(autoincrement())
+  id_usuario     String    @db.Uuid
+  id_semaforo    Int
+  data_hora      DateTime? @default(now()) @db.Timestamp(6)
+  tipo           String?   @db.VarChar(50)
+  mensagem       String?
+  lida           Boolean?  @default(false)
+  semaforo       semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
+  usuario        usuario   @relation(fields: [id_usuario], references: [id], onDelete: NoAction, onUpdate: NoAction)
+}
+
+model semaforo {
+  id_semaforo            Int                      @id @default(autoincrement())
+  endereco               String?                  @db.VarChar(255)
+  latitude               Decimal?                 @db.Decimal(9, 6)
+  longitude              Decimal?                 @db.Decimal(9, 6)
+  status_ativo           Boolean?                 @default(true)
+  status_funcionando     Boolean?                 @default(true)
+  data_instalacao        DateTime?                @db.Date
+  ultimo_check           DateTime?                @db.Timestamp(6)
+  tipo                   String?                  @db.VarChar(50)
+  modelo                 String?                  @db.VarChar(50)
+  analytics              analytics[]
+  configuracoes_semaforo configuracoes_semaforo[]
+  historico_status       historico_status[]
+  manutencoes            manutencoes[]
+  notificacoes           notificacoes[]
+}
+
+model usuario {
+  id            String         @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  nome          String         @db.VarChar(100)
+  email         String         @unique @db.VarChar(100)
+  password      String
+  telefone      String?        @db.VarChar(20)
+  tipo_usuario  String?        @db.VarChar(50)
+  data_cadastro DateTime?      @default(now()) @db.Timestamp(6)
+  ativo         Boolean?       @default(true)
+  notificacoes  notificacoes[]
 }

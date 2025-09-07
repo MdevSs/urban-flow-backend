@@ -1,12 +1,12 @@
 // src/auth/auth.service.ts
 import { Injectable, UnauthorizedException } from '@nestjs/common';
-import { UsersService } from '../users/users.service';
+import { UsuarioService } from '../usuario/usuario.service';
 import { JwtService } from '@nestjs/jwt';
-import { CreateUsersDto } from 'src/users/dto/create-users.dto';
+import { CreateUsuarioDto } from 'src/usuario/dto/usuario.dto';
 
 @Injectable()
 export class AuthService {
-  constructor(private usersService: UsersService, private jwt: JwtService) {}
+  constructor(private usersService: UsuarioService, private jwt: JwtService) {}
 
   async validateUser(email: string, pass: string): Promise<{acces_token: string}> {
     const user = await this.usersService.findByEmail(email);
@@ -28,7 +28,7 @@ export class AuthService {
   // }
 
   // src/auth/auth.service.ts
-  async register(dto: CreateUsersDto ) {
+  async register(dto: CreateUsuarioDto ) {
     // 1. Verificar se já existe
     const existingUser = await this.usersService.findByEmail(dto.email);
     if (existingUser) {
