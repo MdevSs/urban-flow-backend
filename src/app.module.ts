@@ -5,9 +5,10 @@ import { Module } from '@nestjs/common';
 import { UsuarioController } from './usuario/usuario.controller';
 import { TwoFAModule } from './2FA/2fa.module';
 import { SemaforoModule } from './semaforo/semaforo.module';
+import { NotificacoesModule } from './notificacoes/notificacoes.module';
 
 @Module({
-  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule ],
+  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule, NotificacoesModule ],
   providers: [PrismaService],
   controllers: [UsuarioController]
 })
