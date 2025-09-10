@@ -6,9 +6,10 @@ import { UsuarioController } from './usuario/usuario.controller';
 import { TwoFAModule } from './2FA/2fa.module';
 import { SemaforoModule } from './semaforo/semaforo.module';
 import { NotificacoesModule } from './notificacoes/notificacoes.module';
+import { ManutencoesModule } from './manutencoes/manutencoes.module';
 
 @Module({
-  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule, NotificacoesModule ],
+  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule, NotificacoesModule, ManutencoesModule ],
   providers: [PrismaService],
   controllers: [UsuarioController]
 })
