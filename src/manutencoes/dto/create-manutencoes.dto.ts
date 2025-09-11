@@ -1,6 +1,6 @@
 import { PartialType } from "@nestjs/mapped-types";
 
-export class CreateManutencoesDto {
+export interface CreateManutencoesDto {
     id_semaforo: number
     data_inicio?: Date
     data_fim?: Date
@@ -9,7 +9,7 @@ export class CreateManutencoesDto {
     observacao?: string    
 }
 
-export class UpdateManutencoesDto extends PartialType(CreateManutencoesDto) {}
+export interface UpdateManutencoesDto extends Partial<CreateManutencoesDto> {}
 
 export interface ResponseManutencoesDto{
     id_semaforo: number
