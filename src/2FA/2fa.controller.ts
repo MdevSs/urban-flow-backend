@@ -18,11 +18,11 @@ export class TwoFAController {
     @UseGuards(JwtAuthGuard)
     @Post('request')
     async requestCode(@Req() req) {
-        const userId = req.user.userId; // vem do JWT
+        const {userId, email} = req.user
         const code = this.twoFAService.createCode(userId);
-        // aqui chamaria EmailService para enviar
+        console.log(req.user)
 
-        return this.twoFAService.sendEmail("leandrohenrique.denise@gmail.com", code)
+        return this.twoFAService.sendEmail(email, code)
     }
 
     @UseGuards(JwtAuthGuard)
