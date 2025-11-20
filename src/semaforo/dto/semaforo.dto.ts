@@ -8,7 +8,8 @@ export interface CreateSemaforoDto {
     data_instalacao?: Date
     ultimo_check?: Date,
     tipo?: string,
-    modelo?: string
+    modelo?: string,
+    url?: string,
 }
 export interface UpdateSemaforoDto extends Partial<CreateSemaforoDto> { }
 
@@ -21,5 +22,7 @@ export interface ResponseSemaforoDto{
     data_instalacao?: Date
     ultimo_check?: Date,
     tipo?: string,
-    modelo?: string 
+    modelo?: string,
+    url?: string,
+
 }

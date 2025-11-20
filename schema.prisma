@@ -71,6 +71,7 @@ model semaforo {
   ultimo_check           DateTime?                @db.Timestamp(6)
   tipo                   String?                  @db.VarChar(50)
   modelo                 String?                  @db.VarChar(50)
+  url                    String?                  @db.VarChar(250)
   analytics              analytics[]
   configuracoes_semaforo configuracoes_semaforo[]
   historico_status       historico_status[]
