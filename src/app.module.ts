@@ -7,11 +7,11 @@ import { TwoFAModule } from './2FA/2fa.module';
 import { SemaforoModule } from './semaforo/semaforo.module';
 import { NotificacoesModule } from './notificacoes/notificacoes.module';
 import { ManutencoesModule } from './manutencoes/manutencoes.module';
-import { SemaforoConfigModule } from './semaforo-config/semaforo-config.module';
 import { AnalisesModule } from './analises/analises.module';
+import { HistoricoModule } from './historico_status/historico.module';
 
 @Module({
-  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule, NotificacoesModule, ManutencoesModule, SemaforoConfigModule, AnalisesModule ],
+  imports: [ UsuarioModule, AuthModule, TwoFAModule, SemaforoModule, NotificacoesModule, ManutencoesModule, AnalisesModule, HistoricoModule ],
   providers: [PrismaService],
   controllers: [UsuarioController]
 })

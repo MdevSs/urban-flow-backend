@@ -9,22 +9,12 @@ datasource db {
 }
 
 model analytics {
-  id_analytics       Int       @id @default(autoincrement())
-  id_semaforo        Int
-  data_hora          DateTime? @default(now()) @db.Timestamp(6)
-  veiculos_contados  Int?
-  velocidade_media   Decimal?  @db.Decimal(5, 2)
-  pedestres_contados Int?
-  semaforo           semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
-}
-
-model configuracoes_semaforo {
-  id_config        Int       @id @default(autoincrement())
-  id_semaforo      Int
-  nome_config      String?   @db.VarChar(100)
-  valor            String?   @db.VarChar(255)
-  data_atualizacao DateTime? @default(now()) @db.Timestamp(6)
-  semaforo         semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
+  id_analytics      Int       @id @default(autoincrement())
+  id_semaforo       Int
+  data_hora         DateTime? @default(now()) @db.Timestamp(6)
+  veiculos_contados Int?
+  velocidade_media  Decimal?  @db.Decimal(5, 2)
+  semaforo          semaforo  @relation(fields: [id_semaforo], references: [id_semaforo], onDelete: NoAction, onUpdate: NoAction)
 }
 
 model historico_status {
@@ -61,22 +51,20 @@ model notificacoes {
 }
 
 model semaforo {
-  id_semaforo            Int                      @id @default(autoincrement())
-  endereco               String?                  @db.VarChar(255)
-  latitude               Decimal?                 @db.Decimal(9, 6)
-  longitude              Decimal?                 @db.Decimal(9, 6)
-  status_ativo           Boolean?                 @default(true)
-  status_funcionando     Boolean?                 @default(true)
-  data_instalacao        DateTime?                @db.Date
-  ultimo_check           DateTime?                @db.Timestamp(6)
-  tipo                   String?                  @db.VarChar(50)
-  modelo                 String?                  @db.VarChar(50)
-  url                    String?                  @db.VarChar(250)
-  analytics              analytics[]
-  configuracoes_semaforo configuracoes_semaforo[]
-  historico_status       historico_status[]
-  manutencoes            manutencoes[]
-  notificacoes           notificacoes[]
+  id_semaforo        Int                @id @default(autoincrement())
+  endereco           String?            @db.VarChar(255)
+  latitude           Decimal?           @db.Decimal(9, 6)
+  longitude          Decimal?           @db.Decimal(9, 6)
+  status_ativo       Boolean?           @default(true)
+  status_funcionando Boolean?           @default(true)
+  data_instalacao    DateTime?          @db.Date
+  tipo               String?            @db.VarChar(50)
+  modelo             String?            @db.VarChar(50)
+  url                String?            @db.VarChar(250)
+  analytics          analytics[]
+  historico_status   historico_status[]
+  manutencoes        manutencoes[]
+  notificacoes       notificacoes[]
 }
 
 model usuario {
