@@ -6,16 +6,16 @@ WORKDIR /home/node
 COPY package*.json ./
 RUN npm ci
 
-# Copia todo o projeto, incluindo schema.prisma
+# Copia tudo
 COPY . .
 
-# Gera o Prisma Client (faz parte das DEPENDENCIES)
+# Gera Prisma Client
 RUN npx prisma generate
 
-# Compila o NestJS
+# Compila Nest
 RUN npm run build
 
-# Remove somente devDependencies
+# Remove devDependencies
 RUN npm prune --omit=dev
 
 
@@ -30,7 +30,10 @@ COPY --from=builder /home/node/node_modules ./node_modules
 COPY --from=builder /home/node/dist ./dist
 COPY --from=builder /home/node/schema.prisma ./schema.prisma
 
-ENV PORT=3001
-EXPOSE 3001
+# REGERA PRISMA CLIENT NA IMAGEM FINAL
+RUN npx prisma generate
+
+ENV PORT=3000
+EXPOSE 3000
 
 CMD ["node", "dist/main.js"]
