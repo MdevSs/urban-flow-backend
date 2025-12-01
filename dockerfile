@@ -7,14 +7,16 @@ WORKDIR /home/node
 COPY package*.json ./
 RUN npm ci
 
+# Copia tudo, incluindo schema.prisma
 COPY --chown=node:node . .
 
-# 🔥 Rodar prisma generate ANTES do build
+# Gera o Prisma Client
 RUN npx prisma generate
 
+# Compila o NestJS
 RUN npm run build
 
-# 🔥 Remover devDependencies APÓS o generate e build
+# Remove devDependencies
 RUN npm prune --omit=dev
 
 
@@ -28,9 +30,9 @@ WORKDIR /home/node
 COPY --from=builder --chown=node:node /home/node/package*.json ./
 COPY --from=builder --chown=node:node /home/node/node_modules ./node_modules
 COPY --from=builder --chown=node:node /home/node/dist ./dist
-COPY --from=builder --chown=node:node /home/node/prisma ./prisma
+COPY --from=builder --chown=node:node /home/node/schema.prisma ./schema.prisma
 
-ENV PORT=3000
-EXPOSE 3000
+ENV PORT=3001
+EXPOSE 3001
 
 CMD ["node", "dist/main.js"]
