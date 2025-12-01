@@ -7,6 +7,6 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule, { cors: true });
   app.setGlobalPrefix('api');
   await app.listen(process.env.PORT ?? 8000);
-  console.log('Listening on http://localhost:3000');
+  console.log(`Launching NestJS app on port ${process.env.PORT}, URL: http://0.0.0.0:${process.env.PORT}`);
 }
 bootstrap();
