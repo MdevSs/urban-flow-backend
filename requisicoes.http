@@ -3,15 +3,14 @@ Content-Type: application/json
 
 {
   "nome": "admin",
-  "email": "leandrohenrique.denise@gmail.com",
+  "email": "leandrohenrique.denise.com",
   "password": "123",
-  "telefone": "1195237482",
-  "tipo_usuario": "admin"
+  "telefone": "1194844754"
 }
 
 ###
 
-POST http://localhost:3001/api/auth/login/
+POST http://localhost:8000/api/auth/login/
 Content-Type: application/json
 
 {
@@ -22,7 +21,7 @@ Content-Type: application/json
 ###
 
 POST http://localhost:3001/api/2fa/teste/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkOTU1NmIyNC1lY2IzLTRiZmItOWQzNi1kYjk2ZGY3NzBhZTgiLCJlbWFpbCI6ImxlYW5kcm9oZW5yaXF1ZS5kZW5pc2VAZ21haWwuY29tIiwiaWF0IjoxNzU3MjY1OTQxLCJleHAiOjE3NTc4NzA3NDF9.F8Pwx6120MpQKqXkqE9FDZjVxH6susLKkspgIWnFePw
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhZTBhYWQxYi1mOGJjLTRhNjgtYjBmYy01OGNjNmQ2ODIwOTAiLCJlbWFpbCI6ImxlYW5kcm9oZW5yaXF1ZS5kZW5pc2VAZ21haWwuY29tIiwiaWF0IjoxNzY0NjEyNzA0LCJleHAiOjE3NjUyMTc1MDR9.0XTH4Hk2KP0_UcUS_7SLJp8bMx0H0SXCAWSF3HZW0V4
 
 
 
