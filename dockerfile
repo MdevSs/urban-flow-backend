@@ -33,7 +33,6 @@ COPY --from=builder /home/node/schema.prisma ./schema.prisma
 # REGERA PRISMA CLIENT NA IMAGEM FINAL
 RUN npx prisma generate
 
-ENV PORT=3000
 EXPOSE 3000
 
 CMD ["node", "dist/main.js"]
