@@ -33,6 +33,6 @@ COPY --from=builder /home/node/schema.prisma ./schema.prisma
 # REGERA PRISMA CLIENT NA IMAGEM FINAL
 RUN npx prisma generate
 
-EXPOSE 3000
+EXPOSE 8000
 
 CMD ["node", "dist/main.js"]
