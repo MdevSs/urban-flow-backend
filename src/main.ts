@@ -8,16 +8,10 @@ async function bootstrap() {
   
   // Configuração explícita de CORS
   app.enableCors({
-    origin: [
-      'http://localhost:6969',      // Seu frontend local
-      'http://127.0.0.1:6969',      // Alternativa com IP
-      // Adicione outras origens conforme necessário (produção, etc)
-    ],
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
-    credentials: true,              // Permite cookies/credenciais
-    preflightContinue: false,       // Responde preflight automaticamente
-  });
+  origin: '*',
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+});
 
   app.setGlobalPrefix('api');
   await app.listen(process.env.PORT ?? 8000);
