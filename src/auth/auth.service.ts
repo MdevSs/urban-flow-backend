@@ -9,9 +9,7 @@ export class AuthService {
   constructor(private usersService: UsuarioService, private jwt: JwtService) {}
 
   async validateUser(email: string, pass: string): Promise<{acces_token: string}> {
-    const user = await this.usersService.findByEmail(email);
-    if (!user) throw new UnauthorizedException('Invalid Credentials');
-    const ok = await this.usersService.validatePassword(user, pass);
+    const {user, ok} = await this.usersService.validatePassword(email, pass);
     if (!ok) throw new UnauthorizedException("Invalid Credentials");
     // remove sensitive fields before returning
     const payload = { sub: user.id, email: user.email };

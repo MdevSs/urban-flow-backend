@@ -21,4 +21,9 @@ export class UsuarioController {
   async get(@Param('id', ParseIntPipe) id: string) {
     return this.usuarioService.findById(id);
   }
+
+  @Get('email/:email')
+  async getEmail(@Param('email') email: string) {
+    return this.usuarioService.findByEmail(email);
+  }
 }

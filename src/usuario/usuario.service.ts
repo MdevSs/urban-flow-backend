@@ -1,4 +1,4 @@
-import { ConflictException, Injectable } from '@nestjs/common';
+import { ConflictException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { CreateUsuarioDto, ResponseUsuarioDto } from './dto/usuario.dto';
 import { PrismaService } from 'src/common/db/prisma.service';
 import * as bcrypt from 'bcrypt';
@@ -32,23 +32,31 @@ export class UsuarioService {
   }
   
   async findByEmail(email: string) {
-    return await this.prisma.usuario.findUnique({ where: { email } });
+    return await this.prisma.usuario.findUnique(
+      {
+        omit: {
+        password: true,
+        telefone: true,
+        tipo_usuario: true,
+        data_cadastro: true,
+        ativo: true,
+      },
+      where: { email } 
+    });
   }
 
   async findById(id: string) {
-    return await this.prisma.usuario.findUnique({ where: { id } });
+    return await this.prisma.usuario.findUnique({
+      where: { id } 
+      });
   }
 
-  async validatePassword(user: {
-    nome: string;
-    email: string;
-    password: string;
-    telefone: string | null;
-    tipo_usuario: string | null;
-    data_cadastro: Date | null;
-    ativo: boolean | null;
-    id: string;
-  }, pass: string) {
-    return await bcrypt.compare(pass, user.password);
+  async validatePassword(email: string ,pass: string) {
+    const user = await this.prisma.usuario.findUnique({
+      where: { email } 
+    });
+    if (!user) throw new UnauthorizedException('Invalid Credentials');
+    const ok = await bcrypt.compare(pass, user.password);
+    return {user, ok}
   }
 }
